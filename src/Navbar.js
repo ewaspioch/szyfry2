@@ -5,7 +5,7 @@ import './Navbar.css'
 function Navbar() {
     return (
         <div>
-            <Link to="/GeneratorLiczbPseudolosowych">Generator Liczb Pseudolosowych</Link>
+            <Link to="/Generator">Generator Liczb Pseudolosowych</Link>
             <Link to="/SzyfrStrumieniowy">Szyfr Strumieniowy</Link>
         </div>
     );
