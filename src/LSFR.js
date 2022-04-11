@@ -1,4 +1,5 @@
 import React from 'react';
+import StreamCipher from './StreamCipher';
 
 function RightShift(props) {
     let seed = props.seed;
@@ -104,6 +105,7 @@ class Generator extends React.Component {
                 <button onClick={() => this.stopGenerating()}>Stop</button>
                 <p></p>
                 {output}
+                <StreamCipher />
             </div>
         );
     }
