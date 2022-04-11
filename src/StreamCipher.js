@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import StreamCipherImg from './StreamCipherImg';
 
 function StreamCipher(props) {
     const [message, setMessage] = useState('')
@@ -8,7 +9,6 @@ function StreamCipher(props) {
     const isBinary = (message) => {
         for(let char of message) {
             if(isNaN(parseInt(char))) {
-                console.log("not binary")
                 return false
             }
         }
@@ -23,7 +23,6 @@ function StreamCipher(props) {
         for(let char of message) {
             converted.push(char.charCodeAt().toString(2))
         }
-        console.log(converted)
         return converted
     }
 
@@ -41,18 +40,37 @@ function StreamCipher(props) {
             }
             encrypted.push(encryptedChar)
         }
-        console.log(encrypted)
         setEncrypted(encrypted.join(' '))
+    }
+
+    const deciphering = (message, key) => {
+        const keyLen = key.length
+        let words = message.split(" ")
+        let encrypted = []
+        let decrypted = []
+        let keyIdx = 0
+        let encryptedChar = ""
+        for(let word of words) {
+            encryptedChar = ""
+            for(let char of word) {
+                encryptedChar += char ^ key[keyIdx]
+                keyIdx = (keyIdx + 1) % keyLen
+            }
+            decrypted.push(String.fromCharCode(parseInt(encryptedChar, 2)))            
+        }
+        setEncrypted(decrypted.join(''))
     }
 
     return (
         <div>
+            <StreamCipherImg setMessage={setMessage} />
             <label>message</label>
-            <input onChange={(e) => { setMessage(e.target.value) }}></input>
+            <input value={message} onChange={(e) => { setMessage(e.target.value) }}></input>
             <div />
             <label>key</label>
             <input onChange={(e) => setKey(e.target.value) }></input>
             <button onClick={() => ciphering(message, key) }>encrypt</button>
+            <button onClick={() => deciphering(message, key) }>decipher</button>
             <div className='result'>
                 <span>result: </span>
                 <span>{encrypted}</span>

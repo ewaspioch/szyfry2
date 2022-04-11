@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 function StreamCipherImg(props) {
+    const { setMessage } = props
 	const [image, setImage] = useState("");
 	const [baseImage, setBaseImage] = useState("");
 
@@ -9,6 +10,7 @@ function StreamCipherImg(props) {
 			let img = event.target.files[0];
 			const base64 = await convertBase64(img);
 			console.log(base64);
+            setMessage(base64)
 			setImage(URL.createObjectURL(img));
 			setBaseImage(base64);
 		}
@@ -34,7 +36,7 @@ function StreamCipherImg(props) {
 				<img src={image} alt="myImage" />
 				<h1>Select Image</h1>
 				<input type="file" name="myImage" onChange={onImageChange} />
-				<img src={baseImage} alt="myImage" />
+				{/* <img src={baseImage} alt="myImage" /> */}
 			</div>
 		</div>
 	);
