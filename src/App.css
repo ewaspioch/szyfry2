@@ -9,3 +9,6 @@ body {
 a, h1, div, span, p {
     color: white;
 }
+div {
+    overflow-wrap: break-word;
+}

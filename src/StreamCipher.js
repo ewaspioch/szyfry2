@@ -83,12 +83,15 @@ function StreamCipher(props) {
             <input onChange={(e) => setKey(e.target.value) }></input>
             <button onClick={() => ciphering(message, key) }>encrypt</button>
             <button onClick={() => deciphering(message, key) }>decipher</button>
+            <div>
+            <span>decoded image: </span>
+            {decodedImage} 
+            </div>
             <div className='result'>
                 <span >result: </span>
                 <span >  {encrypted} </span>
                 
             </div>
-            {decodedImage} 
         </div>
     );
 }
