@@ -33,10 +33,12 @@ function StreamCipherImg(props) {
 	return (
 		<div>
 			<div>
-				<img src={image} alt="myImage" />
+				{/* <img src={image} alt="myImage" /> */}
 				<h1>Select Image</h1>
 				<input type="file" name="myImage" onChange={onImageChange} />
-				{/* <img src={baseImage} alt="myImage" /> */}
+				<div/>
+				<img src={baseImage} alt="myImage" width={400} height={400}/>
+
 			</div>
 		</div>
 	);

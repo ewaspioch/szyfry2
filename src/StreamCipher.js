@@ -6,6 +6,8 @@ function StreamCipher(props) {
     const [key, setKey] = useState('')
     const [encrypted, setEncrypted] = useState('')
 
+    const [decodedImage, setDecodedImage] = useState('')
+
     const isBinary = (message) => {
         for(let char of message) {
             if(isNaN(parseInt(char))) {
@@ -41,6 +43,7 @@ function StreamCipher(props) {
             encrypted.push(encryptedChar)
         }
         setEncrypted(encrypted.join(' '))
+        setMessage(encrypted.join(' '))
     }
 
     const deciphering = (message, key) => {
@@ -58,12 +61,21 @@ function StreamCipher(props) {
             }
             decrypted.push(String.fromCharCode(parseInt(encryptedChar, 2)))            
         }
+
         setEncrypted(decrypted.join(''))
+        setMessage(decrypted.join(''))
+
+        let dec = decrypted.join('')
+        if(dec.startsWith('data:image')){
+            setDecodedImage(<div> <img src={dec} alt="myImage" width={400} height={400} /> </div>)
+        }
+        
     }
 
     return (
         <div>
             <StreamCipherImg setMessage={setMessage} />
+
             <label>message</label>
             <input value={message} onChange={(e) => { setMessage(e.target.value) }}></input>
             <div />
@@ -72,9 +84,11 @@ function StreamCipher(props) {
             <button onClick={() => ciphering(message, key) }>encrypt</button>
             <button onClick={() => deciphering(message, key) }>decipher</button>
             <div className='result'>
-                <span>result: </span>
-                <span>{encrypted}</span>
+                <span >result: </span>
+                <span >  {encrypted} </span>
+                
             </div>
+            {decodedImage} 
         </div>
     );
 }
